@@ -1,0 +1,86 @@
+delete from Readers;
+delete from Account;
+delete from Loanslip;
+delete from LoanDetail;
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('SV002', N'Lê Minh Tuấn', '2003-01-10', '012345678902', N'Sinh viên', 'tuan.le@email.com', '0912345678', N'123 Đường A, Quận 1, TP. HCM', N'Công nghệ Thông tin');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('SV003', N'Trần Thị Mai', '2004-02-15', '012345678903', N'Sinh viên', 'mai.tran@email.com', '0912345679', N'456 Đường B, Quận 3, TP. HCM', N'Kế toán');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('SV004', N'Phạm Văn Hùng', '2003-03-20', '012345678904', N'Sinh viên', 'hung.pham@email.com', '0912345680', N'789 Đường C, Quận 5, TP. HCM', N'Cơ khí');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('SV005', N'Huỳnh Thị Lan', '2005-04-25', '012345678905', N'Sinh viên', 'lan.huynh@email.com', '0912345681', N'101 Đường D, Quận 7, TP. HCM', N'Ngôn ngữ Anh');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('SV006', N'Bùi Văn Đức', '2003-05-30', '012345678906', N'Sinh viên', 'duc.bui@email.com', '0912345682', N'202 Đường E, Quận 9, TP. HCM', N'Công nghệ Thông tin');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('SV007', N'Đặng Thị Hoa', '2004-06-05', '012345678907', N'Sinh viên', 'hoa.dang@email.com', '0912345683', N'303 Đường F, Quận 11, TP. HCM', N'Quản trị Kinh doanh');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('SV008', N'Ngô Văn Nam', '2003-07-10', '012345678908', N'Sinh viên', 'nam.ngo@email.com', '0912345684', N'404 Đường G, Quận Gò Vấp, TP. HCM', N'Điện tử Viễn thông');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('SV009', N'Dương Thị Thu', '2005-08-15', '012345678909', N'Sinh viên', 'thu.duong@email.com', '0912345685', N'505 Đường H, Quận Tân Bình, TP. HCM', N'Tài chính Ngân hàng');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('SV010', N'Hoàng Văn Long', '2003-09-20', '012345678910', N'Sinh viên', 'long.hoang@email.com', '0912345686', N'606 Đường I, Quận Bình Thạnh, TP. HCM', N'Công nghệ Thông tin');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('SV011', N'Vũ Thị Kim', '2004-10-25', '012345678911', N'Sinh viên', 'kim.vu@email.com', '0912345687', N'707 Đường K, Quận Phú Nhuận, TP. HCM', N'Luật');
+
+-- ==========================================================
+-- 10 DỮ LIỆU GIẢNG VIÊN (GV)
+-- ==========================================================
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('GV002', N'Nguyễn Văn Bình', '1980-01-05', '023456789002', N'Giảng viên', 'binh.nguyen@email.com', '0987654322', N'808 Đường L, Quận 2, TP. HCM', N'Công nghệ Thông tin');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('GV003', N'Trần Thị Cúc', '1982-02-10', '023456789003', N'Giảng viên', 'cuc.tran@email.com', '0987654323', N'909 Đường M, Quận 4, TP. HCM', N'Kế toán');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('GV004', N'Lê Văn Dũng', '1978-03-15', '023456789004', N'Giảng viên', 'dung.le@email.com', '0987654324', N'111 Đường N, Quận 6, TP. HCM', N'Cơ khí');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('GV005', N'Phạm Thị Lan', '1985-04-20', '023456789005', N'Giảng viên', 'lan.pham@email.com', '0987654325', N'222 Đường P, Quận 8, TP. HCM', N'Ngôn ngữ Anh');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('GV006', N'Hoàng Văn Minh', '1990-05-25', '023456789006', N'Giảng viên', 'minh.hoang@email.com', '0987654326', N'333 Đường Q, Quận 10, TP. HCM', N'Công nghệ Thông tin');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('GV007', N'Vũ Thị Nga', '1988-06-30', '023456789007', N'Giảng viên', 'nga.vu@email.com', '0987654327', N'444 Đường R, Quận 12, TP. HCM', N'Quản trị Kinh doanh');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('GV008', N'Đặng Văn Sơn', '1975-07-05', '023456789008', N'Giảng viên', 'son.dang@email.com', '0987654328', N'555 Đường S, Quận Tân Phú, TP. HCM', N'Điện tử Viễn thông');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('GV009', N'Bùi Thị Thảo', '1992-08-10', '023456789009', N'Giảng viên', 'thao.bui@email.com', '0987654329', N'666 Đường T, Quận Bình Tân, TP. HCM', N'Tài chính Ngân hàng');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('GV010', N'Ngô Văn Hùng', '1983-09-15', '023456789010', N'Giảng viên', 'hung.ngo@email.com', '0987654330', N'777 Đường U, TP. Thủ Đức, TP. HCM', N'Công nghệ Thông tin');
+
+INSERT INTO Readers (ReaderId, FullName, DateOfBirth, NationalId, TypeOfReader, Email, Telephone, Address, Department)
+VALUES 
+('GV011', N'Dương Thị Mai', '1995-10-20', '023456789011', N'Giảng viên', 'mai.duong@email.com', '0987654331', N'888 Đường V, Huyện Củ Chi, TP. HCM', N'Luật');

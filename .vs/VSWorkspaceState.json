@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ClientPage",
+    "\\ManageLibrary (1)",
+    "\\ManageLibrary (1)\\ManageLibrary",
+    "\\ManageLibrary (1)\\ManageLibrary\\Views",
+    "\\ManageLibrary (1)\\ManageLibrary\\Views\\Shared",
+    "\\QLTV",
+    "\\QLTV (1)",
+    "\\QLTV (1)\\Controllers",
+    "\\QLTV\\Models",
+    "\\QLTV\\Models\\Entity"
+  ],
+  "SelectedNode": "\\_Layout.cshtml",
+  "PreviewInSolutionExplorer": false
+}
