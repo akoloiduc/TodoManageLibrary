@@ -162,18 +162,6 @@ INSERT INTO Account (AccountId, Username, Password, EmployeeId, ReaderId)
 VALUES ('TK001', N'admin', N'123', 'NV001', NULL);
 GO
 
--- 3. (Tùy chọn) Thêm một Độc giả mẫu
-INSERT INTO Readers (ReaderId, FullName, TypeOfReader)
-VALUES ('DG001', N'Nguyễn Văn A', N'Sinh viên');
-GO
-
--- 4. (Tùy chọn) Thêm một Tài khoản Độc giả liên kết với 'DG001'
--- TÀI KHOẢN: nguyenvana
--- MẬT KHẨU: 123
-INSERT INTO Account (AccountId, Username, Password, EmployeeId, ReaderId)
-VALUES ('TK002', N'nguyenvana', N'123', NULL, 'DG001');
-GO
-
 -- Bổ sung dữ liệu cha trước khi thêm Sách để tránh lỗi khóa ngoại
 -- Thêm dữ liệu vào bảng Category
 INSERT INTO Category (CategoryId, Name) 
