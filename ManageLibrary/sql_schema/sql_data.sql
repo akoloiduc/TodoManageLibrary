@@ -1,4 +1,16 @@
-﻿IF DB_ID('ManageLibrary') IS NULL
+--Comment Ctrl + K + C
+--Uncomment Ctrl + K + U
+
+--Drop database hiện có
+
+--USE [master];
+--GO
+--ALTER DATABASE [ManageLibrary] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+--GO
+--DROP DATABASE [ManageLibrary];
+--GO
+
+IF DB_ID('ManageLibrary') IS NULL
     CREATE DATABASE ManageLibrary;
 GO
 USE ManageLibrary;
@@ -81,6 +93,7 @@ CREATE TABLE Books (
     Position NVARCHAR(50),                           -- Vị trí trên kệ
     NumOfPage INT,                                   -- Số trang
     Cost DECIMAL(10,2),                              -- Giá
+    Quantity INT NOT NULL CONSTRAINT DF_Books_Quantity DEFAULT 5, -- Số lượng tồn
     CategoryId VARCHAR(20),                          -- Thể loại
     AuthorId VARCHAR(20),                            -- Tác giả
     PublisherId VARCHAR(20),                         -- Nhà xuất bản
@@ -88,6 +101,13 @@ CREATE TABLE Books (
     FOREIGN KEY (AuthorId) REFERENCES Author(AuthorId),
     FOREIGN KEY (PublisherId) REFERENCES Publisher(PublisherId)
 );
+
+-- Bổ sung cột Quantity nếu CSDL hiện tại chưa có (khi chạy trên DB đã tồn tại)
+IF COL_LENGTH('Books', 'Quantity') IS NULL
+BEGIN
+    ALTER TABLE Books ADD Quantity INT NOT NULL CONSTRAINT DF_Books_Quantity_Add DEFAULT 5 WITH VALUES;
+END
+GO
 
 -- ==============================================
 -- BẢNG PHIẾU MƯỢN
@@ -182,15 +202,15 @@ VALUES
 PRINT N'Đã thêm dữ liệu mẫu thành công!';
 
 -- Thêm dữ liệu vào bảng Books (đã có Category/Author/Publisher)
-INSERT INTO Books (BookId, Name, YearOfPublic, Position, NumOfPage, Cost, CategoryId, AuthorId, PublisherId)
+INSERT INTO Books (BookId, Name, YearOfPublic, Position, NumOfPage, Cost, Quantity, CategoryId, AuthorId, PublisherId)
 VALUES 
-(N'S001', N'Lập trình C# cơ bản', 2020, N'A1', 350, 100000, N'TL001', N'TG001', N'NXB001'),
-(N'S002', N'Lập trình Java nâng cao', 2021, N'B2', 420, 120000, N'TL001', N'TG002', N'NXB002'),
-(N'S003', N'Thiết kế web với HTML, CSS', 2022, N'C1', 320, 90000, N'TL002', N'TG003', N'NXB003'),
-(N'S004', N'Khoa học dữ liệu với Python', 2023, N'A3', 500, 150000, N'TL001', N'TG004', N'NXB001'),
-(N'S005', N'Cơ sở dữ liệu SQL', 2019, N'B1', 380, 85000, N'TL003', N'TG001', N'NXB002'),
-(N'S006', N'An toàn mạng máy tính', 2021, N'C2', 450, 135000, N'TL002', N'TG005', N'NXB003'),
-(N'S007', N'Giới thiệu về Trí tuệ nhân tạo', 2022, N'D1', 330, 110000, N'TL001', N'TG006', N'NXB001');
+(N'S001', N'Lập trình C# cơ bản', 2020, N'A1', 350, 100000, 10, N'TL001', N'TG001', N'NXB001'),
+(N'S002', N'Lập trình Java nâng cao', 2021, N'B2', 420, 120000, 8, N'TL001', N'TG002', N'NXB002'),
+(N'S003', N'Thiết kế web với HTML, CSS', 2022, N'C1', 320, 90000, 7, N'TL002', N'TG003', N'NXB003'),
+(N'S004', N'Khoa học dữ liệu với Python', 2023, N'A3', 500, 150000, 5, N'TL001', N'TG004', N'NXB001'),
+(N'S005', N'Cơ sở dữ liệu SQL', 2019, N'B1', 380, 85000, 6, N'TL003', N'TG001', N'NXB002'),
+(N'S006', N'An toàn mạng máy tính', 2021, N'C2', 450, 135000, 4, N'TL002', N'TG005', N'NXB003'),
+(N'S007', N'Giới thiệu về Trí tuệ nhân tạo', 2022, N'D1', 330, 110000, 9, N'TL001', N'TG006', N'NXB001');
 
 -- Thêm dữ liệu độc giả 
 INSERT INTO Readers (ReaderId, FullName, TypeOfReader, Department) VALUES (N'DG123456789', N'Trần Văn An', N'Sinh viên', N'Công nghệ thông tin');
@@ -352,21 +372,21 @@ GO
 -- ==============================================
 -- BỔ SUNG THÊM SÁCH (S008 - S020)
 -- ==============================================
-INSERT INTO Books (BookId, Name, YearOfPublic, Position, NumOfPage, Cost, CategoryId, AuthorId, PublisherId)
+INSERT INTO Books (BookId, Name, YearOfPublic, Position, NumOfPage, Cost, Quantity, CategoryId, AuthorId, PublisherId)
 VALUES
-(N'S008', N'Đắc nhân tâm', 2018, N'E1', 320, 79000, N'TL006', N'TG007', N'NXB005'),
-(N'S009', N'Sapiens: Lược sử loài người', 2017, N'F2', 512, 169000, N'TL007', N'TG008', N'NXB002'),
-(N'S010', N'Cha giàu, cha nghèo', 2000, N'E2', 207, 68000, N'TL005', N'TG009', N'NXB003'),
-(N'S011', N'Nhà giả kim', 1988, N'G1', 224, 75000, N'TL004', N'TG010', N'NXB005'),
-(N'S012', N'Cho tôi xin một vé đi tuổi thơ', 2008, N'G2', 200, 50000, N'TL004', N'TG011', N'NXB004'),
-(N'S013', N'Quẳng gánh lo đi và vui sống', 2019, N'E1', 380, 90000, N'TL006', N'TG007', N'NXB005'),
-(N'S014', N'Homo Deus: Lược sử tương lai', 2019, N'F2', 540, 179000, N'TL007', N'TG008', N'NXB002'),
-(N'S015', N'Mắt biếc', 1990, N'G2', 250, 65000, N'TL004', N'TG011', N'NXB004'),
-(N'S016', N'Lập trình Python từ cơ bản đến nâng cao', 2022, N'A4', 600, 250000, N'TL001', N'TG004', N'NXB001'),
-(N'S017', N'Ngữ pháp Tiếng Anh cơ bản', 2020, N'H1', 400, 120000, N'TL008', N'TG003', N'NXB001'),
-(N'S018', N'Kế toán tài chính', 2021, N'E3', 550, 180000, N'TL005', N'TG002', N'NXB003'),
-(N'S019', N'Quản trị mạng căn bản', 2022, N'C3', 450, 160000, N'TL002', N'TG005', N'NXB001'),
-(N'S020', N'Tâm lý học đám đông', 2015, N'F1', 300, 88000, N'TL006', N'TG006', N'NXB002');
+(N'S008', N'Đắc nhân tâm', 2018, N'E1', 320, 79000, 12, N'TL006', N'TG007', N'NXB005'),
+(N'S009', N'Sapiens: Lược sử loài người', 2017, N'F2', 512, 169000, 6, N'TL007', N'TG008', N'NXB002'),
+(N'S010', N'Cha giàu, cha nghèo', 2000, N'E2', 207, 68000, 15, N'TL005', N'TG009', N'NXB003'),
+(N'S011', N'Nhà giả kim', 1988, N'G1', 224, 75000, 9, N'TL004', N'TG010', N'NXB005'),
+(N'S012', N'Cho tôi xin một vé đi tuổi thơ', 2008, N'G2', 200, 50000, 11, N'TL004', N'TG011', N'NXB004'),
+(N'S013', N'Quẳng gánh lo đi và vui sống', 2019, N'E1', 380, 90000, 7, N'TL006', N'TG007', N'NXB005'),
+(N'S014', N'Homo Deus: Lược sử tương lai', 2019, N'F2', 540, 179000, 5, N'TL007', N'TG008', N'NXB002'),
+(N'S015', N'Mắt biếc', 1990, N'G2', 250, 65000, 8, N'TL004', N'TG011', N'NXB004'),
+(N'S016', N'Lập trình Python từ cơ bản đến nâng cao', 2022, N'A4', 600, 250000, 10, N'TL001', N'TG004', N'NXB001'),
+(N'S017', N'Ngữ pháp Tiếng Anh cơ bản', 2020, N'H1', 400, 120000, 6, N'TL008', N'TG003', N'NXB001'),
+(N'S018', N'Kế toán tài chính', 2021, N'E3', 550, 180000, 4, N'TL005', N'TG002', N'NXB003'),
+(N'S019', N'Quản trị mạng căn bản', 2022, N'C3', 450, 160000, 3, N'TL002', N'TG005', N'NXB001'),
+(N'S020', N'Tâm lý học đám đông', 2015, N'F1', 300, 88000, 9, N'TL006', N'TG006', N'NXB002');
 GO
 
 -- ==============================================
