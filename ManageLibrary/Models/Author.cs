@@ -19,6 +19,7 @@ public partial class Author
     // NVARCHAR(100) NOT NULL -> Required, StringLength(100)
     [Required(ErrorMessage = "Tên tác giả là bắt buộc.")]
     [StringLength(100, ErrorMessage = "Tên tác giả không được vượt quá 100 ký tự.")]
+    [RegularExpression(@"^[^\d]*$", ErrorMessage = "Họ tên nhân viên không được chứa số.")]
     public string Name { get; set; } = null!;
 
     // ================================================
