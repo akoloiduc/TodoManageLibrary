@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Trang Chủ";
+}
+
+<div class="text-center p-5 mb-4 bg-light rounded-3">
+    <h1 class="display-4">Chào mừng đến với Thư Viện</h1>
+    <p class="lead">Nơi tri thức bắt đầu. Tìm kiếm hàng ngàn đầu sách ngay.</p>
+
+    @* Kiểm tra nếu người dùng đã đăng nhập mới hiển thị thanh tìm kiếm *@
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form asp-controller="ClientPage" asp-action="Index" method="get" class="d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control form-control-lg" placeholder="Nhập tên sách, tác giả...">
+                    <button class="btn btn-primary" type="submit">Tìm Kiếm</button>
+                </div>
+            </div>
+        </form>
+    }
+    
+</div>
+
+@* Hiển thị sách nổi bật với "Xem chi tiết" chỉ khi người dùng đã đăng nhập *@
+<div class="row">
+    <h2 class="mb-3">Sách Nổi Bật</h2>
+    @foreach (var b in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@b.Name</h5>
+                    <p class="card-text">@(b.Author?.Name ?? "N/A")</p>
+
+                    @* Nếu người dùng đã đăng nhập, hiển thị "Xem chi tiết" *@
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="ClientPage" asp-action="Details" asp-route-id="@b.BookId" class="btn btn-primary">
+                            Xem chi tiết
+                        </a>
+                    }
+                    else
+                    {
+                        <p>Đăng nhập để xem chi tiết.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
