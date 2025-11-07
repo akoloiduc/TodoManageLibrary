@@ -22,25 +22,65 @@ namespace ManageLibrary.Controllers
 
         // === SỬA ĐỔI CHÍNH Ở ĐÂY ===
         // Chuyển sang async và truy vấn CSDL
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string query) // Thêm tham số 'query'
         {
-            // 1. Tải danh sách sách từ CSDL
-            // Dùng Include() để tải kèm thông tin Tác giả và Thể loại
-            var bookList = await _context.Books
+            // 1. Lưu lại query để hiển thị trên ô tìm kiếm
+            ViewData["CurrentFilter"] = query;
+
+            // 2. Bắt đầu câu truy vấn
+            var booksQuery = _context.Books
                                 .AsNoTracking()
-                                .Include(b => b.Author)   // Tải kèm tác giả
-                                .Include(b => b.Category) // Tải kèm thể loại
-                                .OrderBy(b => b.Name)    // Sắp xếp theo tên
+                                .Include(b => b.Author)
+                                .Include(b => b.Category)
+                                .AsQueryable();
+
+            // 3. (Logic của Search) Áp dụng bộ lọc nếu có query
+            if (!String.IsNullOrEmpty(query))
+            {
+                string searchLower = query.ToLower();
+                booksQuery = booksQuery.Where(b =>
+                    b.Name.ToLower().Contains(searchLower) ||
+                    (b.Author != null && b.Author.Name.ToLower().Contains(searchLower))
+                );
+            }
+
+            // 4. Lấy kết quả cuối cùng
+            var bookList = await booksQuery
+                                .OrderBy(b => b.Name)
                                 .ToListAsync();
 
-            // 2. Tải dữ liệu cho các dropdown (nếu View của bạn có)
+            // 5. Tải dropdowns (nếu cần)
             await PopulateDropdowns();
 
-            // 3. Gửi danh sách (bookList) làm Model sang View
+            // 6. Gửi danh sách đã lọc (hoặc đầy đủ) sang View
             return View(bookList);
         }
 
-        // (Hàm này giữ nguyên như code của bạn)
+        // Action 'Details' giữ nguyên
+        // === THÊM DÒNG NÀY VÀO ===
+        [HttpGet("Details/{id}")]
+        public async Task<IActionResult> Details(string id)
+        {
+            // ... (giữ nguyên code Details của bạn) ...
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var book = await _context.Books
+                .Include(b => b.Author)
+                .Include(b => b.Category)
+                .Include(b => b.Publisher)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.BookId == id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
+        }
         private async Task PopulateDropdowns(string? selectedAuthorId = null, string? selectedPublisherId = null, string? selectedCategoryId = null)
         {
             // Tải danh sách Tác giả

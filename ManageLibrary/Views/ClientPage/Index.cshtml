@@ -9,7 +9,7 @@
     <h1 class="display-4">Chào mừng đến với Thư Viện</h1>
     <p class="lead">Nơi tri thức bắt đầu. Tìm kiếm hàng ngàn đầu sách ngay.</p>
 
-    <form asp-controller="Book" asp-action="Search" method="get" class="d-flex justify-content-center">
+    <form asp-controller="ClientPage" asp-action="Index" method="get" class="d-flex justify-content-center">
         <div class="col-md-6">
             <div class="input-group">
                 <input type="text" name="query" class="form-control form-control-lg" placeholder="Nhập tên sách, tác giả...">
@@ -28,7 +28,9 @@
                 <div class="card-body">
                     <h5 class="card-title">@b.Name</h5>
                     <p class="card-text">@(b.Author?.Name ?? "N/A")</p>
-                    <a href="#" class="btn btn-primary">Xem chi tiết</a>
+                    <a asp-controller="ClientPage" asp-action="Details" asp-route-id="@b.BookId" class="btn btn-primary">
+                        Xem chi tiết
+                    </a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@* File: Views/ClientPage/Details.cshtml *@
+@model ManageLibrary.Models.Book
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // (Hoặc _ClientLayout.cshtml)
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        @* <div class="col-md-4">
+            <img src="https://via.placeholder.com/300x450?text=Book+Cover" class="img-fluid rounded shadow" alt="Bìa sách">
+        </div> *@
+
+        <div class="col-md-8">
+            <h1 class="display-5">@Model.Name</h1>
+            <h4 class="text-muted">@(Model.Author?.Name ?? "Không rõ tác giả")</h4>
+            <hr>
+
+            <dl class="row">
+                <dt class="col-sm-3">Mã sách</dt>
+                <dd class="col-sm-9">@Model.BookId</dd>
+
+                <dt class="col-sm-3">Thể loại</dt>
+                <dd class="col-sm-9">@(Model.Category?.Name ?? "N/A")</dd>
+
+                <dt class="col-sm-3">Nhà xuất bản</dt>
+                <dd class="col-sm-9">@(Model.Publisher?.Name ?? "N/A")</dd>
+
+                <dt class="col-sm-3">Năm xuất bản</dt>
+                <dd class="col-sm-9">@Model.YearOfPublic</dd>
+
+                <dt class="col-sm-3">Số trang</dt>
+                <dd class="col-sm-9">@Model.NumOfPage</dd>
+
+                <dt class="col-sm-3">Giá bìa</dt>
+                <dd class="col-sm-9">@Model.Cost?.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</dd>
+
+                <dt class="col-sm-3">Vị trí</dt>
+                <dd class="col-sm-9">@(Model.Position ?? "N/A")</dd>
+
+                <dt class="col-sm-3">Số lượng còn lại</dt>
+                <dd class="col-sm-9">@Model.Quantity</dd>
+            </dl>
+
+            <hr>
+
+            <a asp-controller="ClientPage" asp-action="Index" class="btn btn-outline-secondary">
+                Quay lại
+            </a>
+
+            @* <a href="#" class="btn btn-primary">
+                Mượn sách
+            </a> *@
+        </div>
+    </div>
+</div>

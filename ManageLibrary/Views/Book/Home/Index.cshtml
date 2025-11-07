@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    ViewData["Title"] = "Trang chủ";
+    // Giả sử bạn dùng một layout riêng cho Client,
+    // Nếu không, hãy trỏ về _Layout.cshtml
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid py-5 mb-4 bg-light text-center">
+    <h1 class="display-5 fw-bold">Chào mừng đến với Thư Viện</h1>
+    <p class="fs-4">Nơi tri thức bắt đầu. Tìm kiếm hàng ngàn đầu sách ngay.</p>
+
+    <form class="d-flex justify-content-center" style="max-width: 600px; margin: 0 auto;" action="/Search" method="get">
+        <input class="form-control form-control-lg me-2" type="search" name="query" placeholder="Nhập tên sách, tác giả...">
+        <button class="btn btn-primary btn-lg" type="submit">Tìm</button>
+    </form>
+</div>
+
+<div class="container">
+    <h2 class="pb-2 mb-3 border-bottom">
+        Duyệt theo Thể loại
+    </h2>
+    <div class="row g-3 mb-4">
+        <div class="col-md-3 col-6">
+            <a href="#" class="btn btn-primary w-100 p-3 fs-5">Lập Trình</a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="#" class="btn btn-primary w-100 p-3 fs-5" style="background-color: #198754; border-color: #198754;">Khoa học dữ liệu</a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="#" class="btn btn-primary w-100 p-3 fs-5" style="background-color: #dc3545; border-color: #dc3545;">Quản trị</a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="#" class="btn btn-primary w-100 p-3 fs-5" style="background-color: #ffc107; border-color: #ffc107; color: #000;">Kỹ năng mềm</a>
+        </div>
+    </div>
+
+    <h2 class="pb-2 mb-3 border-bottom">
+        Sách Nổi Bật
+    </h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-3 col-6">
+            <div class="card h-100 box-shadow">
+                <img src="https://via.placeholder.com/200x300?text=Bia+Sach" class="card-img-top" alt="An toàn mạng">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">An toàn mạng máy tính</h5>
+                    <p class="card-text text-muted">Đặng Tiến F</p>
+                    <a href="#" class="btn btn-primary mt-auto">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            [cite_start]<div class="card h-100 box-shadow">
+                [cite: 5]
+                <img src="https://via.placeholder.com/200x300?text=Bia+Sach" class="card-img-top" alt="Big Data">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Big Data và Analytics</h5>
+                    <p class="card-text text-muted">Phạm Minh D</p>
+                    [cite_start]<a href="#" class="btn btn-primary mt-auto">Xem chi tiết</a> [cite: 5]
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            [cite_start]<div class="card h-100 box-shadow">
+                [cite: 5]
+                <img src="https://via.placeholder.com/200x300?text=Bia+Sach" class="card-img-top" alt="SQL">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Cơ sở dữ liệu SQL</h5>
+                    <p class="card-text text-muted">Nguyễn Văn A</p>
+                    [cite_start]<a href="#" class="btn btn-primary mt-auto">Xem chi tiết</a> [cite: 5]
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            [cite_start]<div class="card h-100 box-shadow">
+                [cite: 5]
+                <img src="https://via.placeholder.com/200x300?text=Bia+Sach" class="card-img-top" alt="Python">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Khoa học dữ liệu với Python</h5>
+                    <p class="card-text text-muted">Phạm Minh D</p>
+                    [cite_start]<a href="#" class="btn btn-primary mt-auto">Xem chi tiết</a> [cite: 5]
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            [cite_start]<div class="card h-100 box-shadow">
+                [cite: 5]
+                <img src="https://via.placeholder.com/200x300?text=Bia+Sach" class="card-img-top" alt="C#">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Lập trình C# cơ bản</h5>
+                    <p class="card-text text-muted">Nguyễn Văn A</p>
+                    [cite_start]<a href="#" class="btn btn-primary mt-auto">Xem chi tiết</a> [cite: 5]
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
