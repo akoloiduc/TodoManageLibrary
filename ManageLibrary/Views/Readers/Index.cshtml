@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ManageLibrary.Models.Reader>
+@model IEnumerable<ManageLibrary.Models.Reader>
 
 @{
     ViewData["Title"] = "Danh sách Độc Giả";
@@ -52,9 +52,7 @@
                                     data-bs-target="#detailsModal-@item.ReaderId" title="Chi tiết">
                                 <i class="fas fa-info-circle"></i>
                             </button>
-                            <a asp-action="Delete" asp-route-id="@item.ReaderId" class="btn btn-danger btn-sm" title="Xóa">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                            @* Bỏ nút xóa ngoài danh sách vì đã có trong trang Chỉnh sửa *@
                         </td>
                     </tr>
                 }
@@ -101,4 +99,3 @@
         </div>
     }
 </div>
-
