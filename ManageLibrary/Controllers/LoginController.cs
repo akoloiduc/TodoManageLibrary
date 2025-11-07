@@ -109,7 +109,7 @@ namespace ManageLibrary.Controllers
         {
             // Xóa cookie đăng nhập
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Login"); // Quay về trang đăng nhập
+            return RedirectToAction("Index", "ClientPage"); // Quay về trang đăng nhập
         }
     }
 }

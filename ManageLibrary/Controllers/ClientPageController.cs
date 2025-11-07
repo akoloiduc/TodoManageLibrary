@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace ManageLibrary.Controllers
 {
-    [Route("Home/")]
+    [Route("Home")]
     public class ClientPageController : Controller
     {
         private readonly ManageLibraryContext _context;

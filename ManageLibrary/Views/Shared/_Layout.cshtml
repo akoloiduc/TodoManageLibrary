@@ -30,16 +30,21 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-warning" href="#">Chào, @User.Identity.Name!</a>
+                                <a class="nav-link text-warning">Chào, @User.Identity.Name!</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Account" asp-action="Logout">Đăng Xuất</a>
+                                <a class="nav-link text-light"
+                                   asp-controller="Login"
+                                   asp-action="Logout"
+                                   onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?');">
+                                    Đăng xuất
+                                </a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Account" asp-action="Index">Đăng Nhập</a>
+                                <a class="nav-link text-light" asp-controller="Account" asp-action="Index">Đăng nhập</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-controller="SignUp" asp-action="Index">Đăng ký</a>

@@ -1,0 +1,156 @@
+﻿@model Tuple<ManageLibrary.Models.Account, ManageLibrary.Models.Reader>
+@{
+    ViewData["Title"] = "Đăng ký tài khoản độc giả";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Tạo tài khoản độc giả</h3>
+                </div>
+                <div class="card-body">
+
+                    <form asp-controller="SignUp" asp-action="Index" id="register-form" method="post">
+
+                        @* Thêm AntiForgeryToken để bảo mật *@
+                        @Html.AntiForgeryToken()
+
+                        @* Hiển thị lỗi chung (từ ModelState.AddModelError("", ...)) *@
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <h5 class="mb-3">Thông tin tài khoản</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Item1.Username" class="form-label">Tên đăng nhập</label>
+                                <input asp-for="Item1.Username" class="form-control" />
+                                <span asp-validation-for="Item1.Username" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Item1.Password" class="form-label">Mật khẩu</label>
+                                <input asp-for="Item1.Password" type="password" class="form-control" />
+                                <span asp-validation-for="Item1.Password" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Xác nhận mật khẩu</label>
+                                <input type="password" name="confirmPassword" id="confirm_password_input" class="form-control" />
+                                <span id="confirm_password_error" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <h5 class="mb-3">Thông tin cá nhân</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Item2.FullName" class="form-label"></label>
+                                <input asp-for="Item2.FullName" class="form-control" />
+                                <span asp-validation-for="Item2.FullName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Item2.DateOfBirth" class="form-label"></label>
+                                <input asp-for="Item2.DateOfBirth" type="date" class="form-control" />
+                                <span asp-validation-for="Item2.DateOfBirth" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Item2.NationalId" class="form-label"></label>
+                                <input asp-for="Item2.NationalId" class="form-control" />
+                                <span asp-validation-for="Item2.NationalId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Item2.TypeOfReader" class="form-label"></label>
+                                <select asp-for="Item2.TypeOfReader" class="form-select">
+                                    <option value="">-- Chọn loại độc giả --</option>
+                                    <option value="Sinh viên">Sinh viên</option>
+                                    <option value="Giảng viên">Giảng viên</option>
+                                    <option value="Khác">Khác</option>
+                                </select>
+                                <span asp-validation-for="Item2.TypeOfReader" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Item2.Email" class="form-label"></label>
+                                <input asp-for="Item2.Email" type="email" class="form-control" />
+                                <span asp-validation-for="Item2.Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Item2.Telephone" class="form-label"></label>
+                                <input asp-for="Item2.Telephone" class="form-control" id="phone" />
+                                <span asp-validation-for="Item2.Telephone" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Item2.Address" class="form-label"></label>
+                            <input asp-for="Item2.Address" class="form-control" />
+                            <span asp-validation-for="Item2.Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Item2.Department" class="form-label"></label>
+                            <input asp-for="Item2.Department" class="form-control" />
+                            <span asp-validation-for="Item2.Department" class="text-danger"></span>
+                        </div>
+
+                        <hr />
+
+                        <div class="text-end">
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary me-2">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-user-plus"></i> Đăng ký
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script>
+        const phoneInput = document.querySelector("#phone");
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "vn",
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+        });
+        const form = document.querySelector("#register-form");
+        form.addEventListener("submit", function() {
+            const internationalNumber = iti.getNumber();
+            phoneInput.value = internationalNumber;
+        });
+        const passwordInput = document.getElementById("password_input");
+        const confirmPasswordInput = document.getElementById("confirm_password_input");
+        const errorSpan = document.getElementById("confirm_password_error");
+
+        function validatePasswordMatch() {
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                errorSpan.textContent = "Mật khẩu xác nhận không khớp.";
+            } else {
+                errorSpan.textContent = "";
+            }
+        }
+
+        passwordInput.addEventListener("input", validatePasswordMatch);
+        confirmPasswordInput.addEventListener("input", validatePasswordMatch);
+
+    </script>
+}
